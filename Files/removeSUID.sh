@@ -14,7 +14,7 @@ fi
 
 startTime=$SECONDS
 
-echo "\u2328 Searching for SUID-bits in / ..."
+echo -e "\u2328 Searching for SUID-bits in / ..."
 
 for i in `find $1 -user root -perm -4000 -print 2>/dev/null`
 do
