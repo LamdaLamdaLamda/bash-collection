@@ -12,6 +12,6 @@ then
   exit 1
 fi
 
-touch -d "2000-01-01 12:00:00" $1
+touch -d "2000-01-01 12:00:00" "$1"
 echo -e "\u2714 Timestamp of $1 changed."
 exit 0

@@ -6,7 +6,7 @@
 #Author       : LamdaLamdaLamda
 #Email        : 25778959+LamdaLamdaLamda@users.noreply.github.com
 ###################################################################
-if test $(id -u -n) != "root"
+if test "$(id -u -n)" != "root"
     then
     echo -e  "\u2715 Missing root privileges..."
     exit 1
@@ -16,11 +16,11 @@ startTime=$SECONDS
 
 echo -e "\u2328 Searching for SUID-bits in / ..."
 
-for i in `find $1 -user root -perm -4000 -print 2>/dev/null`
+for i in $(find "$1" -user root -perm -4000 -print 2>/dev/null)
 do
   echo -e "\u2328 Found SUID-bit $i"
-  chmod u-s $i
-  if [ $? != 0 ]
+ 
+  if [ "$(chmod u-s "$i")" ]
   then
     echo -e "\u2714 Successfuly removed SUID on $i"
   else
@@ -28,5 +28,5 @@ do
   fi
 done
 
-duration=$(( SECONDS - start ))
+duration=$(( SECONDS - startTime ))
 echo "\u2328 Duration $duration seconds"
