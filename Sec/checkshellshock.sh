@@ -8,7 +8,7 @@
 #Author       : LamdaLamdaLamda
 #Email        : 25778959+LamdaLamdaLamda@users.noreply.github.com
 ###################################################################
-SHELLSHOCK=`env x="() { :;}; echo x" bash -c "" 2>/dev/null`
+SHELLSHOCK=$(env x="() { :;}; echo x" bash -c "" 2>/dev/null)
 if test -n "$SHELLSHOCK"
 then
 	echo -e "\u2715 Vulnerable for Shellshock (CVE-2014-6271)"

@@ -6,13 +6,11 @@
 #Author       : LamdaLamdaLamda
 #Email        : 25778959+LamdaLamdaLamda@users.noreply.github.com
 ###################################################################
-if test $(id -u -n) != "root"
+if test "$(id -u -n)" != "root"
 then
     echo -e  "\u2715 Missing root privileges..."
     exit 1
 fi
-
-PING=`ping -c 1 -W 1 $1 `
 
 if test $? != 0
 then
@@ -28,7 +26,7 @@ curl -s --output /tmp/ssl-heartbleed.nse https://svn.nmap.org/nmap/scripts/ssl-h
 if test -e /tmp/ssl-heartbleed.nse
 then
   echo -e "\u2328 Starting vulnerability check for heartbleed"
-  SCAN=`nmap -p 443 --script /tmp/ssl-heartbleed $1`
+  SCAN=$(nmap -p 443 --script /tmp/ssl-heartbleed "$1")
   if [[ $SCAN =~ $VULNERABLE ]]
   then
     echo -e "\u2715 Vulnerable!"

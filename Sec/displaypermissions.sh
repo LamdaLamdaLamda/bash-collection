@@ -7,7 +7,7 @@
 #Author       : LamdaLamdaLamda
 #Email        : 25778959+LamdaLamdaLamda@users.noreply.github.com
 ###################################################################
-if test `id -u` -ne 0
+if test "$(id -u)" -ne 0
 then
   echo -e "[\u2715] Missing privileges..."
   exit 1

@@ -13,13 +13,13 @@ then
   exit 1
 fi
 
-if test $1 == "-d"
+if test "$1" == "-d"
 then
   echo -e "\u2328 Deactivating capslock"
   setxkbmap -option caps:none
 fi
 
-if test $1 == "-a"
+if test "$1" == "-a"
 then
   echo -e "\u2328 Activating capslock"
   setxkbmap -option

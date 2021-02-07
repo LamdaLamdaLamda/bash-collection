@@ -6,4 +6,4 @@
 #Author       : LamdaLamdaLamda
 #Email        : 25778959+LamdaLamdaLamda@users.noreply.github.com
 ###################################################################
-ncat $1 7777
+ncat "$1" 7777

@@ -9,11 +9,11 @@
 OUTPUTFILE="$1-pub-sub.asc"
 
 echo -e "\u2328 Generating GPG public key export for $1"
-gpg --armor --output $OUTPUTFILE  --export $1
+gpg --armor --output "$OUTPUTFILE"  --export "$1"
 
 if test $? -eq 0
 then
-  cat $OUTPUTFILE
+  cat "$OUTPUTFILE"
 else
   echo -e "\u2715 Unable to open $OUTPUTFILE"
   exit 1
