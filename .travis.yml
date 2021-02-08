@@ -1,0 +1,13 @@
+language: shell
+before_install:
+  - sudo apt-get -y install shellcheck
+addons:
+  apt:
+    update: true
+jobs:
+  fast_finish: true
+os:
+  - linux
+dist: focal
+script:
+  - ./verify.sh
