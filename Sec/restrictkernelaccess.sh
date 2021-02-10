@@ -1,8 +1,8 @@
 #!/bin/bash
 ###################################################################
 #Script Name  : restrictkernelaccess.sh
-#Description  : Configures the sysFS configuration to archieve a hardened
-#               kernel configuration (except the network part).
+#Description  : Configures the sysFS to archieve a hardened
+#               kernel configuration (except for the network part).
 #Args         : None
 #Author       : LamdaLamdaLamda
 #Email        : 25778959+LamdaLamdaLamda@users.noreply.github.com
@@ -40,6 +40,18 @@ sysctl -w fs.suid_dumpable=0 1>/dev/nul
 
 echo -e "\u2328 PID will be appended after filename"
 sysctl -w kernel.core_uses_pid=1 1>/dev/nul
+
+echo -e "\u2328 Changing the maximum number of guard pages"
+sysctl -w vm.max_map_count=524240 1>/dev/nul
+
+echo -e "\u2328 Diabling unprivileged BPF"
+sysctl -w kernel.unprivileged_bpf_disabled=1 1>/dev/nul
+
+echo -e "\u2328 Enabling JIT-hardening for BPF"
+sysctl -w net.core.bpf_jit_harden=2 1>/dev/nul
+
+echo -e "\u2328 Restrict loading TTY line disciplines"
+sysctl -w vm.unprivileged_userfaultfd=0 1>/dev/nul
 
 echo -e "\u2328 Applying changes"
 sysctl -p
