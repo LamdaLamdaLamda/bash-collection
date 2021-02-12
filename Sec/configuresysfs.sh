@@ -1,6 +1,6 @@
 #!/bin/bash
 ###################################################################
-#Script Name  : restrictkernelaccess.sh
+#Script Name  : configuresysfs.sh
 #Description  : Configures the sysFS to archieve a hardened
 #               kernel configuration (except for the network part).
 #Args         : None
