@@ -6,4 +6,4 @@
 #Author       : LamdaLamdaLamda
 #Email        : 25778959+LamdaLamdaLamda@users.noreply.github.com
 ###################################################################
-alias="tune2fs -O extents,uninit_bg,dir_index"
+alias ext3toext4="tune2fs -O extents,uninit_bg,dir_index"

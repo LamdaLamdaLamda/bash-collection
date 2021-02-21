@@ -50,7 +50,7 @@ then
     echo -e "[\u2715] Verification failed."
     exit 1
 else
-    echo -e "[\u2714] Verification suceed."
+    echo -e "[\u2714] Verification succeed."
     exit 0
 fi
 
