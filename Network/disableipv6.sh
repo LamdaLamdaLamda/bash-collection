@@ -12,7 +12,6 @@ then
   exit 1
 fi
 
-
 echo -e "\u2328 Dropping INPUT/FORWARD/OUTPUT"
 ip6tables -P INPUT DROP 2>/dev/null
 ip6tables -P FORWARD DROP 2>/dev/null
