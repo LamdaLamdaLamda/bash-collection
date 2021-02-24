@@ -2,7 +2,7 @@
 ###################################################################
 #Script Name  : configuresysfs.sh
 #Description  : Configures the sysFS to archieve a hardened
-#               kernel configuration (except for the network part).
+#               kernel configuration.
 #Args         : None
 #Author       : LamdaLamdaLamda
 #Email        : 25778959+LamdaLamdaLamda@users.noreply.github.com
@@ -52,6 +52,41 @@ sysctl -w net.core.bpf_jit_harden=2 1>/dev/nul
 
 echo -e "\u2328 Restrict loading TTY line disciplines"
 sysctl -w vm.unprivileged_userfaultfd=0 1>/dev/nul
+
+echo -e "\u2328 Activating SYN cookies"
+echo 1 > /proc/sys/net/ipv4/tcp_syncookies
+
+echo -e "\u2328 Ignoring ICMP-Echo requests"
+echo 0 > /proc/sys/net/ipv4/icmp_echo_ignore_all
+
+echo -e "\u2328 Ignoring ICMP-Echo broadcasts"
+echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts
+
+echo -e "\u2328 Deactivate log of error responses"
+echo 1 > /proc/sys/net/ipv4/icmp_ignore_bogus_error_responses
+
+echo -e "\u2328 Disable IP forwarding"
+echo 1 > /proc/sys/net/ipv4/ip_forward
+echo 0 > /proc/sys/net/ipv4/ip_forward
+
+echo -e "\u2328 Disable ICMP forwarding"
+for i in /proc/sys/net/ipv4/conf/*/accept_redirects; do echo 0 > "$i"; done
+for i in /proc/sys/net/ipv4/conf/*/send_redirects; do echo 0 > "$i"; done
+
+echo -e "\u2328 Disable source-routed packets"
+for i in /proc/sys/net/ipv4/conf/*/accept_source_route; do echo 0 > "$i"; done
+
+echo -e "\u2328 Disable multicast routing"
+for i in /proc/sys/net/ipv4/conf/*/mc_forwarding; do echo 0 > "$i"; done
+
+echo -e "\u2328 Disable ARP proxy"
+for i in /proc/sys/net/ipv4/conf/*/proxy_arp; do echo 0 > "$i"; done
+
+echo -e "\u2328 Enable secure redirects"
+for i in /proc/sys/net/ipv4/conf/*/secure_redirects; do echo 1 > "$i"; done
+
+echo -e "\u2328 Disable bootp relay"
+for i in /proc/sys/net/ipv4/conf/*/bootp_relay; do echo 0 > "$i"; done
 
 echo -e "\u2328 Applying changes"
 sysctl -p
