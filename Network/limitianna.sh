@@ -12,7 +12,7 @@ then
   exit 1
 fi
 
-echo -e "\u2328 Dropping traffic for IANA Ips"
+echo -e "\u2328 Dropping traffic for IANA IPs"
 
 echo -e "\u2328 IANA - Local Identification"
 iptables -A INPUT -s 0.0.0.0/7 -j DROP

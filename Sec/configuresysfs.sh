@@ -47,6 +47,9 @@ sysctl -w vm.max_map_count=524240 1>/dev/nul
 echo -e "\u2328 Diabling unprivileged BPF"
 sysctl -w kernel.unprivileged_bpf_disabled=1 1>/dev/nul
 
+echo -e "\u2328 Activating Reverse Path Filtering"
+sysctl -w net.ipv4.conf.all.rp_filter=1 1>/dev/null
+
 echo -e "\u2328 Enabling JIT-hardening for BPF"
 sysctl -w net.core.bpf_jit_harden=2 1>/dev/nul
 
@@ -54,20 +57,21 @@ echo -e "\u2328 Restrict loading TTY line disciplines"
 sysctl -w vm.unprivileged_userfaultfd=0 1>/dev/nul
 
 echo -e "\u2328 Activating SYN cookies"
-echo 1 > /proc/sys/net/ipv4/tcp_syncookies
+sysctl -w net.ipv4.tcp_syncookies=1 1>/dev/nul
+sysctl -w net.ipv4.tcp_synack_retries=5 1>/dev/null
 
 echo -e "\u2328 Ignoring ICMP-Echo requests"
-echo 0 > /proc/sys/net/ipv4/icmp_echo_ignore_all
+sysctl -w net.ipv4.icmp_echo_ignore_all=0 1>/dev/nul
 
 echo -e "\u2328 Ignoring ICMP-Echo broadcasts"
-echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts
+sysctl -w net.ipv4.icmp_echo_ignore_broadcasts=1 1>/dev/nul
 
 echo -e "\u2328 Deactivate log of error responses"
-echo 1 > /proc/sys/net/ipv4/icmp_ignore_bogus_error_responses
+sysctl -w net.ipv4.icmp_ignore_bogus_error_responses=1 
 
 echo -e "\u2328 Disable IP forwarding"
-echo 1 > /proc/sys/net/ipv4/ip_forward
-echo 0 > /proc/sys/net/ipv4/ip_forward
+sysctl -w net.ipv4.ip_forward=1 1>/dev/nul
+sysctl -w net.ipv4.ip_forward=0 1>/dev/nul
 
 echo -e "\u2328 Disable ICMP forwarding"
 for i in /proc/sys/net/ipv4/conf/*/accept_redirects; do echo 0 > "$i"; done
