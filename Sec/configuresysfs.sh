@@ -13,6 +13,10 @@ then
   exit 1
 fi
 
+
+echo -e "\u2328 Restricting  magic sysrq keys"
+sysctl -w kernel.sysrq=0 1>/dev/nul
+
 echo -e "\u2328 Restricting access to kernel logs"
 sysctl -w kernel.dmesg_restrict=1 1>/dev/nul
 
@@ -72,6 +76,9 @@ sysctl -w net.ipv4.icmp_ignore_bogus_error_responses=1
 echo -e "\u2328 Disable IP forwarding"
 sysctl -w net.ipv4.ip_forward=1 1>/dev/nul
 sysctl -w net.ipv4.ip_forward=0 1>/dev/nul
+
+echo -e "\u2328 Log martian-packets"
+sysctl -w net.ipv4.conf.all.log_martians=1
 
 echo -e "\u2328 Disable ICMP forwarding"
 for i in /proc/sys/net/ipv4/conf/*/accept_redirects; do echo 0 > "$i"; done
